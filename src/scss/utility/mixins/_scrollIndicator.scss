@@ -1,0 +1,40 @@
+@mixin scrollIndicator() {
+    display: none;
+    position: absolute;
+    bottom: -(#{map-get($scroll-indicator-size, 'default') / 2});
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: map-get($scroll-indicator-size, 'default');
+    height: map-get($scroll-indicator-size, 'default');
+    border-radius: 100%;
+    color: color(white);
+    background: color(accent-secondary);
+    font-size: rem-calc(24);
+    align-items: center;
+    justify-content: center;
+    z-index: 9;
+
+    @include bp(sm) {
+        display: flex;
+    }
+    @include bp(md) {
+        width: map-get($scroll-indicator-size, 'md');
+        height: map-get($scroll-indicator-size, 'md');
+        bottom: -(#{map-get($scroll-indicator-size, 'md') / 2});
+    }
+    
+    &:before {
+        font-family: icomoon;
+        content: $icomoon-var-Arrow;
+        transform: rotate(90deg);
+        margin-left: -1px;
+        margin-top: 1px;
+        -webkit-font-smoothing: antialiased;
+
+        @include bp(md) {
+            margin-left: -2px;
+            margin-top: 0;
+        }
+    }
+}

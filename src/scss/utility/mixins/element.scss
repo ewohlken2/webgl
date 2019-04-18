@@ -1,0 +1,7 @@
+@mixin element($name) {
+    @at-root {
+        &#{$element-separator}#{$name} {
+            @content;
+        }
+    }
+}

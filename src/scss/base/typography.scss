@@ -1,0 +1,12 @@
+@each $selector, $styles in (body, small) {
+    #{$selector} {
+       @include typography(#{$selector});
+    }
+}
+
+@each $selector, $styles in (h1, h2, h3, h4, h5) {
+    #{$selector} {
+       @include typography('heading');
+       @include typography(#{$selector});
+    }
+}

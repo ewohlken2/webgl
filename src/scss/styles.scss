@@ -1,0 +1,25 @@
+$critical: false;
+
+@import "settings";
+
+// These output themes-shared css based on the settings file
+@import "icomoon/icomoon-base";
+@import "base/normalize";
+
+// These 
+@import "base/fonts";
+@import "base/typography";
+@import "base/container";
+@import "base/layout";
+@import "base/accordion";
+@import "base/button";
+@import "base/responsive";
+
+@import "shared/loader";
+@import "shared/wysiwyg";
+// @import 'shared/storage-location-card';
+// Theme
+// @import "shared/modal";
+// @import "shared/location-search";
+
+//WIDGETS

@@ -1,0 +1,154 @@
+@mixin staggerDelay(
+    $count: 3,
+    $step: 100,
+    $initial: 0,
+    $context: "&",
+    $selector: ""
+) {
+    @for $i from 0 through $count - 1 {
+        &:nth-child(#{$i + 1}) #{$selector} {
+            @include navSectionActivated(#{$context}) {
+                animation-delay: #{$initial + $i * $step}ms;
+            }
+        }
+    }
+}
+
+$easeOutSine: cubic-bezier(0.39, 0.575, 0.565, 1);
+
+@mixin staggeredDelay($count, $step: 100, $initial: 0, $context: null) {
+    @for $i from 0 through $count - 1 {
+        @include nonCritical {
+            @if ($context) {
+                #{$context}:nth-child(#{$i + 1}) & {
+                    animation-delay: #{$initial + $i * $step}ms;
+                }
+            } @else {
+                &:nth-child(#{$i + 1}) {
+                    animation-delay: #{$initial + $i * $step}ms;
+                }
+            }
+        }
+    }
+}
+@mixin staggeredTransition($count, $step: 100, $initial: 0, $context: null) {
+    @for $i from 0 through $count - 1 {
+        @include nonCritical {
+            @if ($context) {
+                #{$context}:nth-child(#{$i + 1}) & {
+                    transition-delay: #{$initial + $i * $step}ms;
+                }
+            } @else {
+                &:nth-child(#{$i + 1}) {
+                    transition-delay: #{$initial + $i * $step}ms !important;
+                }
+            }
+        }
+    }
+}
+
+@mixin preAnimationStyles($context: "") {
+    #{$context}[data-js-animate] & {
+        @content;
+    }
+}
+
+@mixin animationStyles($context: "") {
+    @include nonCritical {
+        #{$context}.animate & {
+            @content;
+        }
+    }
+}
+
+@include nonCritical {
+    @keyframes cardAnimation {
+        0% {
+            transform: translate3d(0, 80px, 0);
+            opacity: 0;
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+            opacity: 1;
+        }
+    }
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    @keyframes graphicAnimation {
+        0% {
+            transform: translate3d(0, 125px, 0);
+            opacity: 0;
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes buttonAnimation {
+        0% {
+            transform: translate3d(0, 40px, 0);
+            opacity: 0;
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeInBottom {
+        0% {
+            opacity: 0;
+            transform: translate3d(0, 40px, 0);
+        }
+        100% {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    @keyframes fadeOutBottom {
+        0% {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+        100% {
+            opacity: 0;
+            transform: translate3d(0, 40px, 0);
+        }
+    }
+
+    @keyframes wobble {
+        from,
+        to {
+            transform: translate3d(0, 0, 0);
+        }
+
+        30% {
+            transform: translate3d(-6px, 0, 0);
+        }
+
+        60% {
+            transform: translate3d(6px, 0, 0);
+        }
+    }
+
+    .wobble {
+            animation: wobble 200ms ease;
+    }
+}

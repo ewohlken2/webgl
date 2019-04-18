@@ -1,0 +1,11 @@
+import DomComponent from "Library/DomComponent";
+
+export default class {{cmpName}}Component extends DomComponent {
+    static name = '{{name}}';
+
+    constructor(el) {
+        super(el);
+
+        setTimeout(this.loaded.bind(this));
+    }
+}

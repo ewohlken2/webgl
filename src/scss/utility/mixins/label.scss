@@ -1,0 +1,4 @@
+@mixin label($visible: none, $color:color(soft-black)){
+    display:$visible;
+    color:$color;
+}

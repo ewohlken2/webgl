@@ -1,0 +1,72 @@
+@mixin localFontFace($fontFamily, $fontData) {
+    @font-face {
+        font-family: #{$fontFamily};
+
+        $style: map-get($map: $fontData, $key: 'style');
+
+
+        @if(type-of($style)=='map') {
+
+            @each $property,
+            $value in $style {
+                #{$property}: $value;
+            }
+        }
+
+        $src: map-get($fontData, 'src');
+
+
+        @if(type-of($src)=='map') {
+            $srcString: '';
+
+            @each $format,
+            $_src in $src {
+                $srcString: $srcString+'url("#{$_src}") format("#{$format}")';
+                $index: index(($src), ($format $_src));
+                @if($index == length($src)) {
+                    $srcString: $srcString + ';';
+                }@else{
+                    $srcString: $srcString + ',';
+                }
+            }
+
+            src:#{$srcString};
+        }@else {
+            src: url($src);
+        }
+    }
+}
+
+@each $font in $web-fonts {
+    @import url($font);
+}
+
+@if variable-exists(local-fonts) {
+
+    @each $fontFamily,
+    $fontData in $local-fonts {
+
+        @if(type-of($fontData)=='list') {
+            @each $fontStyle in $fontData {
+                @include localFontFace($fontFamily, $fontStyle)
+            }
+        }
+
+        @else {
+            @include localFontFace($fontFamily, $fontData);
+        }
+    }
+
+}
+
+@font-face {
+    font-family: Gotham;
+    font-weight: 400;
+    src: url(/assets/fonts/Gotham-Book_Web.woff) format("woff"), url(/assets/fonts/Gotham-Book_Web.woff2) format("woff2"),
+}
+
+@font-face {
+    font-family: Gotham;
+    font-weight: 700;
+    src: url(/assets/fonts/Gotham-Bold_Web.woff) format("woff"), url(/assets/fonts/Gotham-Bold_Web.woff2) format("woff2"),
+}

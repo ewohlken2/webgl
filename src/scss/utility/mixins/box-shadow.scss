@@ -1,0 +1,4 @@
+  @mixin box-shadow($key) {
+    $shadow: shadow($key);   
+    box-shadow: $shadow;
+  }

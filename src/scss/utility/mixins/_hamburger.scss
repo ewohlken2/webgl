@@ -1,0 +1,108 @@
+// $hamburger-padding-x: 10px !default;
+// $hamburger-padding-y: 15px !default;
+$hamburger-layer-width: 17px !default;
+$hamburger-layer-height: 2px !default;
+$hamburger-layer-spacing: 3px !default;
+$hamburger-layer-color: #7B7773 !default;
+$hamburger-layer-border-radius: 0 !default;
+$hamburger-hover-opacity: 0.7 !default;
+$hamburger-hover-transition-duration: 0.15s !default;
+$hamburger-hover-transition-timing-function: linear !default;
+// To use CSS filters as the hover effect instead of opacity,
+// set $hamburger-hover-use-filter as true and
+// change the value of $hamburger-hover-filter accordingly.
+@mixin hamburger($activeSelector: '&.active', $color: $hamburger-layer-color, $activeColor: $hamburger-layer-color) {
+    // padding: $hamburger-padding-y $hamburger-padding-x;
+    font-size: 0;
+    line-height: 1;
+    
+    @include nonCritical {
+        transition-property: opacity;
+        transition-duration: $hamburger-hover-transition-duration;
+        transition-timing-function: $hamburger-hover-transition-timing-function;
+    }
+
+    @include nonCritical {
+
+        #{$activeSelector} > div > div {
+            transform: rotate(45deg);
+
+            transition-delay: 0.12s;
+            transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+            &,
+            &::before,
+            &::after {
+                background-color: $activeColor;
+            }
+            &::before {
+                top: 0;
+                opacity: 0;
+
+                @include nonCritical {
+                    transition: top 0.075s ease, opacity 0.075s 0.12s ease;
+                }
+            }
+            &::after {
+                bottom: 0;
+                transform: rotate(-90deg);
+
+                @include nonCritical {
+                    transition: bottom 0.075s ease, transform 0.075s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+                }
+            }
+        }
+    }
+    
+    &>div {
+        width: $hamburger-layer-width;
+        height: $hamburger-layer-height * 3 + $hamburger-layer-spacing * 2;
+        display: inline-block;
+        position: relative;
+        &>div {
+            display: block;
+            top: 50%;
+            margin-top: $hamburger-layer-height / -2;
+            
+            @include nonCritical {
+                transition-duration: 0.075s;
+                transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+            }
+
+            &,
+            &::before,
+            &::after {
+                width: $hamburger-layer-width;
+                height: $hamburger-layer-height;
+                background-color: $color;
+                border-radius: $hamburger-layer-border-radius;
+                position: absolute;
+                
+                @include nonCritical {
+                    transition-property: transform, background-color;
+                    transition-duration: 0.15s;
+                    transition-timing-function: ease;
+                }
+            }
+            &::before,
+            &::after {
+                content: "";
+                display: block;
+            }
+            &::before {
+                top: ($hamburger-layer-spacing + $hamburger-layer-height) * -1;
+
+                @include nonCritical {
+                    transition: top 0.075s 0.12s ease, opacity 0.075s ease;
+                }
+            }
+            &::after {
+                bottom: ($hamburger-layer-spacing + $hamburger-layer-height) * -1;
+                
+                @include nonCritical {
+                    transition: bottom 0.075s 0.12s ease, transform 0.075s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+                }
+            }
+        }
+    }
+}

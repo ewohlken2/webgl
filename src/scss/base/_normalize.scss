@@ -1,0 +1,84 @@
+html {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba($primary, 0.5);
+    font-size: 100%;
+    height: 100%;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+picture {
+    width: 100%;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+    height: auto;
+}
+
+h1,h2,h3,h4,h5,p,ul {
+    margin: 0;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+button {
+    border: 0;
+    padding: 0;
+    background: none;
+    color: inherit;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+small {
+    display: inline-block;
+}
+
+input {
+    border: none;
+}
+
+textarea {
+    resize: none;
+}
+
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+
+ button,
+ input,
+ optgroup,
+ select,
+ textarea {
+   font: inherit; /* 1 */
+   font-size: 100%; /* 1 */
+   line-height: 1.15; /* 1 */
+   margin: 0; /* 2 */
+
+   @include nonCritical {
+    &:focus {
+        outline: 0;
+    }
+   }
+ }

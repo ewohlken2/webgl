@@ -1,0 +1,27 @@
+@mixin textbox($input-text-color:color(soft-black), $focus-border-color:color(grey1), $border-color:color(grey2), $input-text-color-focus:color(soft-black), $height: 50px){
+    font-weight:400;
+    font-size:rem-calc(15);
+     height: $height;
+    border:1px solid $border-color;
+    border-radius:4px;
+    padding:0px 10px;
+    color:$input-text-color;
+    width:100%;
+    font-family: inherit;
+    transition: all $duration ease;
+    -webkit-font-smoothing: antialiased;
+
+    @include nonCritical() {
+        &:focus{
+            border:1px solid $focus-border-color;
+            outline:none;
+            color:$input-text-color-focus;
+        }
+    }
+
+    &::placeholder {
+        color:$input-text-color;
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+    }
+}

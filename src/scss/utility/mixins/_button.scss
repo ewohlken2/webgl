@@ -1,0 +1,268 @@
+@mixin button--base($height: 40px, $font: true, $radius: 4px) {
+
+    @if($font) {
+        @include typography('button');
+    }
+
+    display: inline-flex;
+    align-items: center;
+    padding: 0 10px;
+    min-height: $height;
+    justify-content: center;
+    text-align: center;
+    border-radius:$radius;
+    letter-spacing: 2px;
+    @include aliasing();
+
+    @include bp(sm) {
+        padding: 0 15px;
+    }
+
+    @include nonCritical {
+        .js-ie11 & {
+            height: $height;
+        }
+
+        cursor: pointer;
+        transition: all $duration ease;
+    }
+}
+
+@mixin button($bg: color(primary),
+              $bg-hover:color(button-hover),
+              $bg-active:color(button-active),
+              $border: false,
+              $border-hover: color(primary),
+              $height: 40px,
+              $color: color(white),
+              $color-hover: null,
+              $color-active:null,
+              $border-active:null,
+              $font: true,
+              $radius: 4px) {
+
+    @include button--base($height, $font, $radius);
+
+    background-color: $bg;
+
+    @if $color {
+        color: $color;
+    }
+
+    @if $border {
+        border: 1px solid $border;
+    }
+
+    @include nonCritical {
+        &:hover,
+        &--hover,
+        &:focus,
+        &--focus,
+        &.focus,
+        &.hover {
+            background: $bg-hover;
+            // border-color: color(grey3);
+            @if ($color-hover) {
+                color: $color-hover;
+            }
+
+            @if $border {
+                border-color: $border-hover;
+            }
+        }
+
+        &--active,
+        &:active,
+        &.active {
+            background: $bg-active;
+            @if ($color-active) {
+                color: $color-active;
+            }
+
+            @if($border-active){
+                border-color:$border-active;
+            }
+            @else if $border and $border-hover {
+                border-color: $border-hover;
+            }
+        }
+    }
+}
+// black button that gets lighter
+@mixin primaryButton($height: 60px) {
+    @include button($border: color(primary), $border-hover: color(primary1dark), $height: $height);
+    @include aliasing;
+}
+
+// same as above but border inverted, and hover gets darker
+@mixin primaryButtonInvert($height: 60px) {
+    @include button($border: color(grey4), $border-hover: color(grey3), $bg-hover: color(primary1dark), $height: $height);
+    @include aliasing;
+}
+
+@mixin primaryButtonInvertTransparent($height: 60px) {
+    @include button($border: transparent,
+        $border-hover: color(grey3),
+        $bg: transparent,
+        $bg-hover: color(primary1dark),
+        $height: $height,
+        $font: false);
+}
+
+// red button that gets darker
+@mixin primaryButton2($height: 60px) {
+    @include button($bg: color(primary),
+            $bg-hover: color(primary),
+            $border: color(primary),
+            $border-hover: color(primary),
+            $height: $height);
+    @include aliasing;
+}
+
+@mixin secondaryButton($border: true) {
+    @include button($border: color(grey4), $border-hover: color(grey1), $bg: color(white));
+    @include aliasing;
+}
+
+@mixin transparentButton($height: 60px) {
+    @include button($height: $height, $border: false, $bg: transparent, $bg-hover: color(grey3), $color: color(primary));
+    @include aliasing;
+}
+
+@mixin tertiaryButton($height: 60px){
+    @include button($bg: color(white), $bg-hover:color(grey3), $color: color(primary), $height: $height);
+    border: 1px solid color(grey4);
+    @include aliasing;
+}
+
+@mixin tertiaryButton2($height: 60px){
+    @include button($bg: color(white), $border: color(grey4), $bg-hover:color(primary), $border-hover:color(primary), $color: color(primary), $color-hover: color(white), $height: $height);
+    @include aliasing;
+}
+
+//TODO: Is the text supposed to be white (can't see on a white background)?
+@mixin borderedButton() {
+    @include button($border: color(grey4), $bg: transparent);
+}
+
+// A transparent button with a black border and black text. On hover, becomes black with white text.
+@mixin borderedButton2() {
+    @include button($border: color(#000), $bg: transparent, $color: color(black), $color-hover: color(white));
+}
+
+// A transparent button with a black border and black text. On hover, becomes black with white text.
+@mixin primaryButtonBordered() {
+    @include button($border: color(#000), $bg: transparent, $bg-hover: color(black), $color: color(black), $color-hover: color(white));
+    @include aliasing;
+}
+
+
+
+// @mixin playVideoIcon {
+//     &:before {
+//         content: $icomoon-var-Play;
+//         font-family: icomoon;
+//         margin-left: -10px;
+//         margin-right: 5px;
+//         font-size: 20px;
+//     }
+// }
+
+// @mixin borderedButton($color: color(secondary1), $active: color(secondary2), $height: 36px, $fill: false) {
+//     @include button--base($height);
+//     font-size: rem-calc(14);
+//     position: relative;
+//     border: 1px solid $color;
+//     outline: 0;
+
+//     @if($fill) {
+//         @include aliasing;
+//         background-color: $color;
+//         color: color(white);
+//         font-weight: 600;
+//     }@else{
+//         color: $color;
+//         background-color: transparent;
+//     }
+
+//     @include nonCritical {
+//         &:after {
+//             content: "";
+//             transition: border $duration--fast ease,
+//                         top $duration--fast ease,
+//                         left $duration--fast ease,
+//                         bottom $duration--fast ease,
+//                         right $duration--fast ease;
+//             position: absolute;
+//             left: -1px;
+//             top: -1px;
+//             bottom: -1px;
+//             right: -1px;
+//             border: 1px solid $color;
+//         }
+
+
+//         &:hover,
+//         &--hover,
+//         &--focus,
+//         &:focus {
+//             &:after {
+//                 left: -4px;
+//                 top: -4px;
+//                 bottom: -4px;
+//                 right: -4px;
+//             }
+//         }
+
+//         &:active,
+//         &.active,
+//         &--active {
+//             border-color: $active;
+
+//             @if($fill) {
+//                 background: $active;
+//             }@else{
+//                 color: $active;
+//             }
+
+//             &:after {
+//                 border-color: $active;
+//             }
+//         }
+//     }
+// }
+
+// @mixin primaryButton {
+//     @include button(color(primary), color(primary--lighter), color(primary--lightest));
+//     -webkit-font-smoothing: antialiased;
+// }
+// @mixin secondaryButton {
+//     @include button(color(primary--lightest), color(primary--lighter), color(primary));
+//     -webkit-font-smoothing: antialiased;
+// }
+// @mixin lightButton {
+//     @include borderedButton(color(white), color(dark1), color(dark2));
+
+// }
+
+// @mixin linkButton($bg: color(primary), $bg-hover:color(primary--lighter), $bg-active: color(primary--lightest)) {
+//     @include typography('button');
+//     display: inline-flex;
+//     align-items: center;
+//     justify-content: center;
+//     background-color: $bg;
+//     color: color(white);
+
+//     @include nonCritical {
+//         transition: background $duration ease;
+
+//         &:hover,
+//         &:focus {
+//             background: $bg-hover;
+//         }
+
+//         &:active {
+//             background: $bg-active;
+//         }
+//     }
+// }

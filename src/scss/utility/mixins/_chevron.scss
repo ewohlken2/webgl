@@ -1,0 +1,32 @@
+@mixin chevron($direction: 'right', $color: color(primary), $size: 10px, $thickness: 2px) {
+    &:before {
+        border-style: solid;
+        border-color: $color;
+        border-width: $thickness $thickness 0 0;
+        content: '';
+        display: inline-block;
+        height: $size;
+        width: $size;
+        position: relative;
+        vertical-align: top;
+        top: 0.15em;
+        transform: rotate(-45deg);
+        
+
+        @if ($direction == 'right') {
+            left: 0;
+            transform: rotate(45deg);
+        }
+    
+        @if ($direction == 'left') {
+            left: 0.25em;
+            transform: rotate(-135deg);
+            margin-right: 8px;
+        }
+        
+        @if ($direction == 'down') {
+            top: 0;
+            transform: rotate(135deg);
+        }
+    }
+}

@@ -1,0 +1,19 @@
+@mixin flexGrid($gutter: 20px) {
+    display: flex;
+    margin-top: (-$gutter);
+    margin-left: (-0.5 * $gutter);
+    margin-right: (-0.5 * $gutter);
+    flex-wrap: wrap;
+}
+
+@mixin flexGridItem($gutter: 20px, $col: 2) {
+    flex: 1 0 100%/$col;
+    max-width: 100%/$col;
+    width: 100%/$col;
+    padding: 0 $gutter/2;
+    margin-top: $gutter;
+
+    > * {
+       height: 100%; 
+    }
+}

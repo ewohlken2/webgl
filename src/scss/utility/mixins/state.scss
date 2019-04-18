@@ -1,0 +1,40 @@
+
+
+@mixin state($property:background, $hover: null, $active: null){
+    @if($hover){
+        @if(is-map($hover)){
+            &:hover{
+                @each $prop, $value in $hover {
+                    #{$prop} : $value;
+                }
+            }
+        } @else {
+            &:hover{
+                #{$property}: $hover;
+            }
+        }
+    }
+
+    @if($active){
+        @if(is-map($active)){
+            &:active{
+                @each $prop, $value in $hover {
+                    #{$prop} : $value;
+                }
+            }
+        } @else {
+            &:active{
+                #{$property}: $active;
+            }
+        }
+    }
+}
+
+@mixin activeState($prop, $val) {
+    @include nonCritical {
+        &:active {
+            #{$prop}: $val;
+        }
+    }
+
+}

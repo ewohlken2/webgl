@@ -1,0 +1,17 @@
+@mixin accordion() {
+    $self: &;
+
+       
+    &__content {
+        overflow: hidden;
+        transition: height $duration ease;
+
+        @include preJs($self) {
+            height: 0;
+        }
+    }
+}
+
+.accordion { 
+    @include accordion();
+}

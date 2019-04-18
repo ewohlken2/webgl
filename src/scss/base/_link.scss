@@ -1,0 +1,5 @@
+@mixin links(){
+    @each $property, $value in $links {
+         #{$property}: #{$value};
+    }
+}

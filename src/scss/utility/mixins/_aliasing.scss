@@ -1,0 +1,13 @@
+// this guy accepts an optional font weight that can be used
+// to lighten the text in windows
+
+@mixin aliasing($windowsFW: false) {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    @if($windowsFW) {
+        .os-windows & {
+            font-weight: #{$windowsFW}
+        }
+    }
+}

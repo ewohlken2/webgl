@@ -1,0 +1,15 @@
+@mixin expandSetting($property, $setting) {
+    @if (type-of($setting) == 'map') {
+        @each $break, $_value in $setting {
+            @if ($break == 'default') {
+                #{$property}: #{$_value};
+            }@else{
+                @include bp($break) {
+                    #{$property}: #{$_value};            
+                }
+            }
+        }
+    } @else {
+        #{$property}: #{$setting};
+    }
+}

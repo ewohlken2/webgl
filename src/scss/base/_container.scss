@@ -1,0 +1,15 @@
+.container {
+    $gutter: map-get($container, gutter);
+    padding: 0 $gutter;
+    margin: 0 auto;
+
+    @each $break, $value in map-get($container, width) {
+        @if ($break == 'default') {
+            max-width: #{$value + (2*$gutter)};
+        }@else{
+            @include bp($break) {
+                max-width: #{$value + (2*$gutter)};
+            }
+        }
+    }
+}

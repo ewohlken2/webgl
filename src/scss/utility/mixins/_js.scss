@@ -1,0 +1,31 @@
+// wraps styles for before js inits
+@mixin preJs($selector: '') {
+    #{$selector}:not(.js) & {
+        @content;
+    }    
+}
+
+// wraps styles for when js inits
+@mixin jsStarted($selector: '') {
+    @include nonCritical() {
+        #{$selector}.js & {
+            @content;
+        }    
+    }
+}
+
+// wraps styles for when js finishes init (mostly for transitions)
+@mixin jsDone($selector: '') {
+    @include nonCritical() {
+        #{$selector}.js-loaded & {
+            @content;
+        }    
+    }
+}
+@mixin jsNotDone($selector: '') {
+    @include nonCritical() {
+        #{$selector}:not(.js-loaded) & {
+            @content;
+        }    
+    }
+}

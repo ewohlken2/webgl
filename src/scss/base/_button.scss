@@ -1,0 +1,72 @@
+
+    .button--primary{
+
+        @include button($bg-hover: color(button-hover));
+        @include ripple();
+
+    }
+
+    .button--primary-dark{
+        @include button($bg-hover:color(blue-light),
+        $color-hover:color(soft-black),
+        $border-hover:color(white));
+    }
+
+
+    .button--secondary{
+        @include button($bg: transparent,
+        $border: color(primary),
+        $color: color(primary),
+        $color-hover: color(soft-black),
+        $bg-hover: color(blue-light),
+        $bg-active: color(blue),
+        $color-active: color(primary),
+        $border-active:color(blue));
+
+        @include ripple($bg-hover: color(blue-light),
+                        $ripple-color:color(blue));
+    }
+
+    .button--secondary-dark{
+        @include button($bg: transparent,
+                        $color:color(white),
+                        $border: color(white),
+                        $border-hover: color(white),
+                        $bg-hover:color(white),
+                        $color-hover: color(soft-black),
+                        $bg-active:color(blue),
+                        $border-active: color(blue),
+                        $color-active: color(white));
+    }
+
+    .button--secondary-light{
+        @include button($bg: transparent,
+        $border: color(primary),
+        $color: color(primary),
+        $color-hover: color(soft-black),
+        $bg-hover: color(white),
+        $bg-active: color(blue),
+        $color-active: color(white),
+        $border-active:color(blue));
+    }
+
+    .button--tertiary{
+        @include button($bg: color(orange-dark),
+        $color: color(white),
+        $color-hover: color(white),
+        $bg-hover: color(soft-black),
+        $bg-active: color(orange),
+        $color-active: color(white));
+    }
+
+    .button--quaternary{
+        @include button($bg: color(green-dark),
+        $color: color(white),
+        $color-hover: color(white),
+        $bg-hover: color(soft-black),
+        $bg-active: color(green),
+        $color-active: color(white));
+    }
+
+@mixin buttonBase() {
+}

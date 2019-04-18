@@ -1,0 +1,70 @@
+$colors: ()!default;
+
+@function color($key) {
+  @if map-has-key($colors, $key) {
+    @return map-get($colors, $key);
+  }
+
+  @warn "Unknown `#{$key}` in $colors.";
+  @return null;
+}
+
+@function shadow($key) {
+  @if map-has-key($shadows, $key) {
+    @return unquote(map-get($shadows, $key));
+  }
+
+  @warn "Unknown `#{$key}` in $colors.";
+  @return null;
+}
+
+@function rem-calc($size) {
+  $remSize: $size / 16;
+  @return #{$remSize}rem;
+}
+
+@function zindex($key) {
+  @if map-has-key($zindex, $key) {
+    @return map-get($zindex, $key);
+  }@else{
+    @warn "unknown z-index `#{$key}`";
+  }
+}
+
+/* If this function is imported, you can import scss files using:
+       
+   @if not-imported("your-file") { @import "your-file"; }
+*/
+$imported-once-files: () !default;
+
+@function not-imported($name) {
+  $imported-once-files: $imported-once-files !global;
+  $module_index: index($imported-once-files, $name);
+  @if (($module_index == null) or ($module_index == false)) {
+    $imported-once-files: append($imported-once-files, $name);
+    @return true;
+  }
+  @return false;
+}
+
+@function gutter($bp) {
+  $gutter: map-get($map: $container, $key: gutter);
+  $fullGutter: map-get($map: $container--full, $key: gutter);
+  @if(map-has-key($map: $gutter, $key: $bp)) {
+      @return map-get($map: $gutter, $key: $bp);
+  }@else{
+      @if(map-has-key($map: $fullGutter, $key: $bp)) {
+          @return map-get($map: $fullGutter, $key: $bp);
+      }
+  }
+
+  @warn "No gutter width found for breakpoint: `#{$bp}`";
+}
+@function containerWidth($bp) {
+  $width: map-get($map: $container, $key: width);
+  @if(map-has-key($map: $width, $key: $bp)) {
+      @return map-get($map: $width, $key: $bp);
+  }@else{
+      @warn "No container width width found for breakpoint: `#{$bp}`";
+  }
+}

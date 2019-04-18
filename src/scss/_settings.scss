@@ -1,0 +1,199 @@
+// TODO optimize font imports, deliver only the weights used on this site
+@import './utility/index';
+@import 'icomoon/icomoon-var';
+@import 'mixins';
+@import 'animations';
+
+// variables (todo: move into separate variables file)
+$critical: false !default;
+$primary: #22598B;
+$secondary: #487A0C;
+$modal-bg: rgba(196,113,11,0.81);
+$colors:(
+    primary:$primary,
+    blue: #009BD7,
+    blue-light: #E4F3FF,
+    blue-dark: $primary,
+    green:#C1D82F,
+    green-light: #EBFFCA,
+    green-dark: $secondary,
+    orange: #EB8939,
+    orange-light: #FFF7ED,
+    orange-dark: #8B2100,
+    soft-black: #363F48,
+    grey1: #58606B,
+    grey2: #CFD3DB,
+    grey3: #EFF1F7,
+    grey4: #F5F7FF,
+    grey5:#606165,
+    white: #FFFFFF,
+    table-row:#F4F4F7,
+    button-hover:#363F48,
+    button-active:#363F48,
+    module-bg: #F5F7FF,
+    border-grey: #D5D7DF
+);
+// grid/responsive stuff
+$breakpoints: (
+    xxs: 375px,
+    xs: 480px,
+    sm: 768px,
+    md: 1024px,
+    header: 1080px,
+    lg: 1280px,
+    xl: 1440px,
+    xxl: 1690px,
+    xxxl: 1921px,
+);
+
+$container: (
+    'gutter': 20px,
+    'width': (
+        'default': 875px,
+        'lg': 1140px
+    )
+);
+
+// storeage search toolbar
+$toolbar--height: 157px;
+$toolbar--filter-height:42px;
+
+// cta bar
+$cta-bar-height: 80px;
+
+// page nav (sticky nav)
+$page-nav-height: 60px;
+$page-nav-height: 60px;
+$bp--page-nav: min-width 1025px;
+
+// hover indicator
+$hover-indicator-gutter: 20px;
+
+// Font stuff
+$web-fonts: (
+    'https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,900'
+);
+
+$local-fonts: (
+    'Gotham': (
+        (
+            'style': (
+                'font-weight': normal
+            ),
+            'src': (
+                'woff2':'/assets/fonts/Gotham-Book_Web.woff2',
+                'woff':'/assets/fonts/Gotham-Book_Web.woff'
+            )
+        ),
+        (
+            'style': (
+                'font-weight': bold
+            ),
+            'src': (
+                'woff2':'/assets/fonts/Gotham-Bold_Web.woff2',
+                'woff':'/assets/fonts/Gotham-Bold_Web.woff'
+            )
+        )
+        // 'ttf' : '/assets/fonts/Knockout-HTF49-Liteweight.ttf',
+        // 'woff2' : '/assets/fonts/Knockout-HTF49-Liteweight.woff2',
+        // 'woff' : '/assets/fonts/Knockout-HTF49-Liteweight.woff'
+    )
+);
+
+$base-font-size: 16px;
+
+// TODO Add better fallbacks
+$font-family--body: 'Montserrat', sans-serif;
+$font-family--heading: 'Gotham', serif;
+$font-spacing: 20px;
+$base-style: (
+    body: (
+        'font-family': $font-family--body,
+        'font-size': 16px,
+        'line-height': 26px,
+        'font-weight': 400,
+        'color': map-get($colors, soft-black)
+    ),
+    heading: (
+        'font-weight': bold,
+        'font-family': $font-family--heading,
+        'color': map-get($colors, soft-black)
+    ),
+    h1: (
+        'font-size': ('md' : 45px, 'default': 32px),
+        'line-height': ('md': 44px, 'default':38px)
+    ),
+    h2: (
+        'font-size': ('md' : 32px, 'default': 24px),
+        'line-height': ('md' : 38px, 'default': 29px)
+    ),
+    h3: (
+        'font-size': ('md': 22px, 'default':20px),
+        'line-height': ('md': 26px, 'default': 24px)
+    ),
+    h4:(
+        'font-size': 18px,
+        'line-height': 19px
+    ),
+    h5:(
+        // 'font-family': $font-family--montserrat,
+        'font-size': 12px,
+        'line-height': 14px,
+        'letter-spacing': 2px,
+        'text-transform': 'uppercase'
+    ),
+    small: (
+        'font-size': 12px,
+        'line-height': 18px,
+        'font-weight': 400,
+    ),
+    button:(
+        'font-size': ('default': 12px),
+        'line-height': ('default': 14px),
+        'letter-spacing': ('default': 2px),
+        'font-weight': bold,
+        'text-transform': 'uppercase',
+        'font-family': $font-family--heading
+    ),
+    // input: (
+    //     'font-size': rem-calc(18),
+    //     'line-height': 20px,
+    //     'color': map-get($colors, primary1),
+    //     'font-family': $font-family--heading,
+    // ),
+);
+
+$links: (
+    'color':$primary
+);
+
+$shadows: (
+    base: "0 1px 4px 2px rgba(0,0,0,0.25)",
+    lift: 	"0 2px 18px 0 rgba(0,0,0,0.1), 0 3px 6px 0 rgba(0,0,0,0.2)",
+);
+    
+
+$zindex: (
+    base: 1,
+    content: 10,
+    header: 50,
+    modal: 99,
+);
+
+$duration--fast: 200ms;
+$duration: 300ms;
+$duration--slow: 500ms;
+$duration--slower: 750ms;
+$duration--slowest: 1000ms;
+
+$widget-spacing: (default: 40px, sm: 50px, md: 60px );
+
+// // Determines media query ordering by mqpacker
+// @include bp(xxs){/*DO NOT REMOVE*/};
+// @include bp(xs){/*DO NOT REMOVE*/};
+// @include bp(min-width 470px){/*DO NOT REMOVE*/};
+// @include bp(sm){/*DO NOT REMOVE*/};
+// @include bp(sm md){/*DO NOT REMOVE*/};
+// @include bp(sm lg){/*DO NOT REMOVE*/};
+// @include bp(md){/*DO NOT REMOVE*/};
+// @include bp(md lg){/*DO NOT REMOVE*/};

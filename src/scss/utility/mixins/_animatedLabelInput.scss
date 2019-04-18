@@ -1,0 +1,97 @@
+@mixin animatedLabelInput(){
+    display:block;
+    position: relative;
+    $container: &;
+
+    &.error{
+        input{
+            border-color: #8B2100 !important;
+            background-color: #FFF7ED !important;
+            color: #8B2100 !important;
+        }
+
+        label{
+            color: #8B2100 !important;
+        }
+    }
+
+    @include nonCritical(){
+        &.touched{
+            input{
+                
+                & + label {
+                    font-size:12px;
+                    color:color(primary);
+                    transform:translateY(-25px);
+                    top:50%;
+                }
+            }
+        }
+    }
+
+    label{
+        color:color(grey1);
+        cursor: text;
+        top:50%;
+        left:10px;
+        transition:$duration;
+        position: absolute;
+        transform:translateY(-50%);
+        font-size:15px;
+        pointer-events: none;
+        font-weight:600;
+        
+    }
+
+    input{
+        @include textbox();
+        height:auto;
+        padding-top:22px;
+        padding-bottom:9px;
+        background-color:transparent;
+        color:color(soft-black);
+        transition:$duration;
+        width:100%;
+        font-weight:600;
+   
+
+        &:-webkit-autofill {
+            & + label{
+                font-size:12px;
+                color:color(primary);
+                transform:translateY(-25px);
+                top:50%;
+            }
+        }
+
+        &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            font-weight:600;
+          }
+          
+          &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+            font-weight:600;
+          }
+          
+          &::-ms-input-placeholder { /* Microsoft Edge */
+            font-weight:600;
+          }
+
+        @include nonCritical(){
+            &:focus, &:active {
+                & + label {
+                    font-size:12px;
+                    color:color(primary);
+                    transform:translateY(-25px);
+                    top:50%;
+                }
+            }
+    
+            // &:valid + label{
+            //     font-size:12px;
+            //     color:color(primary);
+            //     transform:translateY(-30px);
+            //     top:50%;
+            // }
+        }
+    }
+}

@@ -1,0 +1,19 @@
+.hidden {
+    &--mobile {
+        @include bp(max-width sm) {
+            display: none !important;
+        }
+    }
+
+    &--tablet {
+        @include bp(sm md) {
+            display: none !important;
+        }
+    }
+
+    &--desktop {
+        @include bp(md) {
+            display: none !important;
+        }
+    }
+}

@@ -1,0 +1,27 @@
+@mixin searchInput($bg: transparent, $button-bg: #FFFFFF, $border-radius:6px, $button-color:color(blue), $border:1px){
+    position: relative;
+    background:$bg;
+    border:$border solid color(blue);
+    border-radius:$border-radius;
+    padding:0px 0px 0px 20px;
+    display:flex;
+    & > input{
+        height:50px !important;
+        width:100% !important;
+        transition:$duration !important;
+        border:0px !important;
+        padding:0px !important;
+    }
+
+    & > button{
+        width:50px;
+        color:$button-color;
+        background:$button-bg;
+        transition:$duration;
+        font-size:24px;
+        border-top-right-radius:$border-radius;
+        border-bottom-right-radius:$border-radius;
+
+
+    }
+}

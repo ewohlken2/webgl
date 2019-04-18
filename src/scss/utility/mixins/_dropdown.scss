@@ -1,0 +1,62 @@
+@mixin dropdownWithWhiteBackground(){
+    .dropdown__container{
+        position: relative;
+        button{
+            font-family:$font-family--body !important;
+            height:50px;
+            text-transform: initial !important;
+            font-size:15px;
+            font-weight: 500;
+            letter-spacing: 0px;
+        }
+
+        &.has-error{
+            .dropdown__trigger{
+                color:color(orange-dark);
+                background:color(orange-light);
+                border:1px solid color(orange-dark);
+            }
+        }
+    }
+
+    .dropdown{
+        min-height:50px;
+        width:auto;
+        overflow-y: auto;
+    }
+
+    .dropdown__trigger {
+        @include button($bg: white,
+                        $color:color(soft-black),
+                        $border: color(grey2),
+                        $border-hover: color(grey2),
+                        $bg-hover:color(grey4),
+                        $color-hover: color(soft-black),
+                        $bg-active:color(blue),
+                        $border-active: color(blue),
+                        $color-active: color(white));
+        justify-content: space-between;
+        text-align: left;
+        line-height: 15px;
+        width:100% !important;
+
+        &:after {
+            content: "";
+            display: inline-block;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid color(soft-black);
+            margin-left: 10px;
+            transition: border-color $duration ease;
+        }
+
+        &:hover:after {
+            border-top-color: color(soft-black);
+        }
+
+        &:active:after,
+        &.active:after {
+            border-top-color: color(white);
+        }
+    }
+}
